@@ -56,21 +56,21 @@ module.exports = {
   },
   User: {
     trips (user, __, ctx) {
-      return Model(ctx.pgPool).getTripsByUserId(user.id)
+      return ctx.loaders.getTripsByUserId.load(user.id)
     },
   },
   Trip: {
     user (trip, __, ctx) {
-      return Model(ctx.pgPool).getUserById(trip.userId)
+      return ctx.loaders.getUserById.load(trip.userId)
     },
 
     comments (trip, __, ctx) {
-      return Model(ctx.pgPool).getCommentsByTripId(trip.id)
+      return ctx.loaders.getCommentsByTripId.load(trip.id)
     }
   },
   Comment: {
     user (comment, __, ctx) {
-      return Model(ctx.pgPool).getUserById(comment.userId)
+      return ctx.loaders.getUserById.load(comment.userId)
     },
   }
 }

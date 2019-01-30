@@ -45,16 +45,6 @@ module.exports = pgPool => {
       }
     },
 
-    async getUserById (id) {
-      try {
-        const user = await pgPool.query(`select * from users where id = $1`, [id])
-
-        return humps.camelizeKeys(user.rows[0])
-      } catch (err) {
-        throw new Error(err)
-      }
-    },
-
     async getUserByUsername (username) {
       try {
         const user = await pgPool.query(`select * from users where username = $1`, [username])
@@ -83,26 +73,6 @@ module.exports = pgPool => {
       } catch (err) {
         throw new Error(err)
       }
-    },
-
-    async getTripsByUserId (userId) {
-      try {
-        const trips = await pgPool.query(`select * from trips where user_id = $1`, [userId])
-
-        return humps.camelizeKeys(trips.rows)
-      } catch (err) {
-        throw new Error(err)
-      }
-    },
-
-    async getCommentsByTripId (id) {
-      try {
-        const comments = await pgPool.query(`select * from trip_comments where trip_id = $1`, [id])
-
-        return humps.camelizeKeys(comments.rows)
-      } catch (err) {
-        throw new Error(err)
-      }
-    },
+    }
   }
 }
