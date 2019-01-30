@@ -6,6 +6,7 @@ create table users (
   id serial primary key,
   username varchar(128) not null unique,
   full_name varchar(255) not null,
+  language varchar(255) not null,
   created_at timestamp not null default current_timestamp
 );
 

@@ -1,0 +1,57 @@
+enum Language {
+  SPANISH
+  ENGLISH
+}
+
+type User {
+  id: ID!
+  username: String!
+  fullName: String!
+  language: Language!
+  trips: [Trip]!
+}
+
+type Trip {
+  id: ID!
+  name: String!
+  placeName: String!
+  user: User!
+  comments: [Comment]!
+}
+
+type Comment {
+  id: ID!
+  comment: String!
+  user: User!
+}
+
+input UserInput {
+  username: String!
+  fullName: String!
+  language: Language!
+}
+
+input TripInput {
+  name: String!
+  placeName: String!
+  userId: ID!
+}
+
+input CommentInput {
+  comment: String!
+  userId: ID!
+  tripId: ID!
+}
+
+type Query {
+  users: [User]!
+  userByUsername(username: String!): User!
+  trips: [Trip]!
+  tripById(id: ID!): Trip!
+}
+
+type Mutation {
+  createUser(input: UserInput!): User!
+  createTrip(input: TripInput!): Trip!
+  createComment(input: CommentInput!): Trip!
+}
